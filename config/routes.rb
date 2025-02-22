@@ -7,4 +7,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  post 'users/sign_in', to: 'sessions#create', defaults: { format: :json }
+  delete 'users/sign_out', to: 'sessions#destroy'
+  get '/file', to: 'upload_files#show_public'
+  resources :users, defaults: { format: :json } do
+    collection do
+      post 'sign_up'
+    end
+  end
+
+  resources :upload_files, defaults: { format: :json }
 end
